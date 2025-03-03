@@ -1,24 +1,3 @@
-// import 'package:flutter/material.dart';
-// import '../components/custom_button.dart';
-// import '../utils/navigator_extension.dart';
-
-// class LoginPage extends StatelessWidget {
-//   const LoginPage({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Center(
-//         child: CustomButton(
-//           text: 'Login',
-//           onPressed: () {
-//             context.pushReplacementNamed('/main'); // Implementasi navigator
-//           },
-//         ),
-//       ),
-//     );
-//   }
-// }
 import 'package:flutter/material.dart';
 import 'package:tiket_wisata/constants/colors.dart';
 import 'package:tiket_wisata/components/main_page.dart';
