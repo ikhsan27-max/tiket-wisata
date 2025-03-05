@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tiket_wisata/gen/assets.gen.dart';
 import 'package:tiket_wisata/constants/colors.dart';
 import 'package:tiket_wisata/widgets/nav_item.dart' as widgets;
+import 'package:tiket_wisata/pages/order_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -14,7 +15,6 @@ class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
   String _currentPage = 'Home';
 
-  
   void _changePage(int index, String title) {
     setState(() {
       _selectedIndex = index;
@@ -74,7 +74,12 @@ class _MainPageState extends State<MainPage> {
               iconPath: Assets.icons.nav.home.path,
               label: 'Home',
               isActive: _selectedIndex == 0,
-              onTap: () => _changePage(0, "Home"),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const OrderPage()),
+                );
+              },
             ),
             widgets.NavItem(
               iconPath: Assets.icons.nav.ticket.path,
@@ -98,7 +103,7 @@ class _MainPageState extends State<MainPage> {
         ),
       ),
       floatingActionButton: GestureDetector(
-        onTap: () => _changePage(-1, "Scan QR"), 
+        onTap: () => _changePage(-1, "Scan QR"),
         child: Container(
           padding: const EdgeInsets.all(12.0),
           decoration: BoxDecoration(
