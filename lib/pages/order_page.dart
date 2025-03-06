@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import '../models/product_models.dart'; // Import model
+
+import '../components/space.dart';
+import '../models/product_models.dart';
+import 'order_detail_page.dart';
+import '../extensions/ext.dart';
+import '../extensions/build_context_ext.dart';
 
 class OrderPage extends StatelessWidget {
   const OrderPage({super.key});
@@ -11,9 +16,9 @@ class OrderPage extends StatelessWidget {
         title: const Text('Penjualan'),
       ),
       body: ListView.separated(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
         itemCount: products.length,
-        separatorBuilder: (context, index) => const SizedBox(height: 12.0),
+        separatorBuilder: (context, index) => const SpaceHeight(20.0),
         itemBuilder: (context, index) {
           final product = products[index];
           return Card(
@@ -21,19 +26,49 @@ class OrderPage extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
-            child: ListTile(
-              contentPadding: const EdgeInsets.all(16.0),
-              title: Text(
-                product.productName,
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-              subtitle: Text(
-                '${product.type} - Rp ${product.price.toStringAsFixed(0)}',
-                style: const TextStyle(color: Colors.grey),
-              ),
-              trailing: Text(
-                'Qty: ${product.quantity}',
-                style: const TextStyle(fontWeight: FontWeight.bold),
+            child: InkWell(
+              onTap: () {
+                print('Product ${product.productName} tapped');
+                
+                context.push(OrderDetailPage(products: [product]));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  children: [
+                    // Product image or icon if available
+                    // If you had an image in your OrderCard, add it here
+                    
+                    const SizedBox(width: 12.0),
+                    
+                    // Product details
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            product.productName,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                          const SizedBox(height: 4.0),
+                          Text(
+                            '${product.type} - ${product.price.currencyFormatRp}',
+                            style: const TextStyle(color: Colors.grey),
+                          ),
+                        ],
+                      ),
+                    ),
+                    
+                    // Quantity
+                    Text(
+                      'Qty: ${product.quantity}',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               ),
             ),
           );

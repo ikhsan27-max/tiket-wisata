@@ -1,111 +1,142 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+/// GENERATED CODE - DO NOT MODIFY BY HAND
+/// *****************************************************
+///  FlutterGen
+/// *****************************************************
 
-class Assets {
-  const Assets._();
-  static const $AssetsImagesGen images = $AssetsImagesGen();
-  static const $AssetsIconsGen icons = $AssetsIconsGen();
-}
+// coverage:ignore-file
+// ignore_for_file: type=lint
+// ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
+
+import 'package:flutter/widgets.dart';
 
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// Directory path: assets/icons/nav
   $AssetsIconsNavGen get nav => const $AssetsIconsNavGen();
+
+  /// Directory path: assets/icons/payment
+  $AssetsIconsPaymentGen get payment => const $AssetsIconsPaymentGen();
+}
+
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/back.png
+  AssetGenImage get back => const AssetGenImage('assets/images/back.png');
+
+  /// File path: assets/images/receipt_card.png
+  AssetGenImage get receiptCard =>
+      const AssetGenImage('assets/images/receipt_card.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [back, receiptCard];
 }
 
 class $AssetsIconsNavGen {
   const $AssetsIconsNavGen();
 
   /// File path: assets/icons/nav/history.svg
-  SvgGenImage get history => const SvgGenImage('assets/icons/nav/history.svg');
+  String get history => 'assets/icons/nav/history.svg';
 
   /// File path: assets/icons/nav/home.svg
-  SvgGenImage get home => const SvgGenImage('assets/icons/nav/home.svg');
+  String get home => 'assets/icons/nav/home.svg';
 
   /// File path: assets/icons/nav/scan.svg
-  SvgGenImage get scan => const SvgGenImage('assets/icons/nav/scan.svg');
+  String get scan => 'assets/icons/nav/scan.svg';
 
   /// File path: assets/icons/nav/setting.svg
-  SvgGenImage get setting => const SvgGenImage('assets/icons/nav/setting.svg');
+  String get setting => 'assets/icons/nav/setting.svg';
 
   /// File path: assets/icons/nav/ticket.svg
-  SvgGenImage get ticket => const SvgGenImage('assets/icons/nav/ticket.svg');
+  String get ticket => 'assets/icons/nav/ticket.svg';
 
   /// List of all assets
-  List<SvgGenImage> get values => [history, home, scan, setting, ticket];
+  List<String> get values => [history, home, scan, setting, ticket];
 }
 
-class $AssetsImagesGen {
-  const $AssetsImagesGen();
+class $AssetsIconsPaymentGen {
+  const $AssetsIconsPaymentGen();
 
-  AssetsGenImages get logoBlue =>
-      const AssetsGenImages('assets/images/quiktix.png');
-  AssetsGenImages get logoQuiktixPutih =>
-      const AssetsGenImages('assets/images/quiktixputih.png');
-  AssetsGenImages get logoIdn => const AssetsGenImages('assets/images/idn.png');
+  /// File path: assets/icons/payment/qris.svg
+  String get qris => 'assets/icons/payment/qris.svg';
+  String get tunai => 'assets/icons/payment/tunai.svg';
+  String get transfer => 'assets/icons/payment/transfer.svg';
+
+  /// List of all assets
+  List<String> get values => [qris, tunai, transfer];
 }
 
-class AssetsGenImages {
-  final String _assetName;
-  const AssetsGenImages(this._assetName);
+class Assets {
+  const Assets._();
 
-  Image image({double? width, double? height}) {
-    return Image.asset(_assetName, width: width, height: height);
-  }
-
-  ImageProvider provider() => AssetImage(_assetName);
-  String get path => _assetName;
+  static const $AssetsIconsGen icons = $AssetsIconsGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
-class SvgGenImage {
-  const SvgGenImage(this._assetName);
+class AssetGenImage {
+  const AssetGenImage(this._assetName, {this.size, this.flavors = const {}});
 
   final String _assetName;
 
-  SvgPicture svg({
+  final Size? size;
+  final Set<String> flavors;
+
+  Image image({
     Key? key,
-    bool matchTextDirection = false,
     AssetBundle? bundle,
-    String? package,
+    ImageFrameBuilder? frameBuilder,
+    ImageErrorWidgetBuilder? errorBuilder,
+    String? semanticLabel,
+    bool excludeFromSemantics = false,
+    double? scale,
     double? width,
     double? height,
-    BoxFit fit = BoxFit.contain,
+    Color? color,
+    Animation<double>? opacity,
+    BlendMode? colorBlendMode,
+    BoxFit? fit,
     AlignmentGeometry alignment = Alignment.center,
-    bool allowDrawingOutsideViewBox = false,
-    WidgetBuilder? placeholderBuilder,
-    String? semanticsLabel,
-    bool excludeFromSemantics = false,
-    SvgTheme theme = const SvgTheme(),
-    ColorFilter? colorFilter,
-    Clip clipBehavior = Clip.hardEdge,
-    // ignore: provide_deprecation_message
-    @deprecated Color? color,
-    // ignore: provide_deprecation_message
-    @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
-    // ignore: provide_deprecation_message
-    @deprecated bool cacheColorFilter = false,
+    ImageRepeat repeat = ImageRepeat.noRepeat,
+    Rect? centerSlice,
+    bool matchTextDirection = false,
+    bool gaplessPlayback = true,
+    bool isAntiAlias = false,
+    String? package,
+    FilterQuality filterQuality = FilterQuality.medium,
+    int? cacheWidth,
+    int? cacheHeight,
   }) {
-    return SvgPicture.asset(
+    return Image.asset(
       _assetName,
       key: key,
-      matchTextDirection: matchTextDirection,
       bundle: bundle,
-      package: package,
+      frameBuilder: frameBuilder,
+      errorBuilder: errorBuilder,
+      semanticLabel: semanticLabel,
+      excludeFromSemantics: excludeFromSemantics,
+      scale: scale,
       width: width,
       height: height,
+      color: color,
+      opacity: opacity,
+      colorBlendMode: colorBlendMode,
       fit: fit,
       alignment: alignment,
-      allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
-      placeholderBuilder: placeholderBuilder,
-      semanticsLabel: semanticsLabel,
-      excludeFromSemantics: excludeFromSemantics,
-      theme: theme,
-      colorFilter: colorFilter,
-      color: color,
-      colorBlendMode: colorBlendMode,
-      clipBehavior: clipBehavior,
-      cacheColorFilter: cacheColorFilter,
+      repeat: repeat,
+      centerSlice: centerSlice,
+      matchTextDirection: matchTextDirection,
+      gaplessPlayback: gaplessPlayback,
+      isAntiAlias: isAntiAlias,
+      package: package,
+      filterQuality: filterQuality,
+      cacheWidth: cacheWidth,
+      cacheHeight: cacheHeight,
     );
+  }
+
+  ImageProvider provider({AssetBundle? bundle, String? package}) {
+    return AssetImage(_assetName, bundle: bundle, package: package);
   }
 
   String get path => _assetName;

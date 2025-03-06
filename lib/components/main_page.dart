@@ -1,7 +1,7 @@
 import 'package:tiket_wisata/gen/assets.gen.dart';
 import 'package:tiket_wisata/constants/colors.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_svg/flutter_svg.dart';
 import '../widgets/nav_item.dart';
 import '../pages/order_page.dart';
 
@@ -41,26 +41,26 @@ class _MainPageState extends State<MainPage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             NavItem(
-              iconPath: Assets.icons.nav.home.path,
+              iconPath: Assets.icons.nav.home,
               label: 'Home',
               isActive: _selectedIndex == 0,
               onTap: () => _onItemTapped(0),
             ),
             NavItem(
-              iconPath: Assets.icons.nav.ticket.path,
+              iconPath: Assets.icons.nav.ticket,
               label: 'Ticket',
               isActive: _selectedIndex == 1,
               onTap: () => _onItemTapped(1),
             ),
             const SizedBox(width: 10.0),
             NavItem(
-              iconPath: Assets.icons.nav.history.path,
+              iconPath: Assets.icons.nav.history,
               label: 'History',
               isActive: _selectedIndex == 2,
               onTap: () => _onItemTapped(2),
             ),
             NavItem(
-              iconPath: Assets.icons.nav.setting.path,
+              iconPath: Assets.icons.nav.setting,
               label: 'Setting',
               isActive: _selectedIndex == 3,
               onTap: () => _onItemTapped(3),
@@ -69,15 +69,20 @@ class _MainPageState extends State<MainPage> {
         ),
       ),
       floatingActionButton: GestureDetector(
-        child: Container(
-          padding: const EdgeInsets.all(12.0),
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            color: AppColors.primaryColor,
+          child: Container(
+            padding: const EdgeInsets.all(12.0),
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: AppColors.primaryColor,
+            ),
+            child: SvgPicture.asset(
+              Assets.icons.nav.scan,
+              width: 50,
+              height: 50,
+              colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            ),
           ),
-          child: Assets.icons.nav.scan.svg(),
         ),
-      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }

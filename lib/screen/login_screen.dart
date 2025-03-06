@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../customtext/custom_text.dart';
-import '../customtext/custom_button.dart'; // 🔹 Import tombol custom
+import '../customtext/custom_text_login.dart';
+import '../components/custom_button.dart'; // 🔹 Import tombol custom
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
