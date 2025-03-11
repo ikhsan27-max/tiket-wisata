@@ -17,6 +17,9 @@ class $AssetsIconsGen {
 
   /// Directory path: assets/icons/payment
   $AssetsIconsPaymentGen get payment => const $AssetsIconsPaymentGen();
+
+  /// Directory path: assets/icons/tambahan
+  $AssetsIconsTambahanGen get tambahan => const $AssetsIconsTambahanGen();
 }
 
 class $AssetsImagesGen {
@@ -60,11 +63,25 @@ class $AssetsIconsPaymentGen {
 
   /// File path: assets/icons/payment/qris.svg
   String get qris => 'assets/icons/payment/qris.svg';
-  String get tunai => 'assets/icons/payment/tunai.svg';
+
+  /// File path: assets/icons/payment/transfer.svg
   String get transfer => 'assets/icons/payment/transfer.svg';
 
+  /// File path: assets/icons/payment/tunai.svg
+  String get tunai => 'assets/icons/payment/tunai.svg';
+
   /// List of all assets
-  List<String> get values => [qris, tunai, transfer];
+  List<String> get values => [qris, transfer, tunai];
+}
+
+class $AssetsIconsTambahanGen {
+  const $AssetsIconsTambahanGen();
+
+  /// File path: assets/icons/tambahan/delete.svg
+  String get delete => 'assets/icons/tambahan/delete.svg';
+
+  /// List of all assets
+  List<String> get values => [delete];
 }
 
 class Assets {

@@ -1,7 +1,7 @@
-import 'package:tiket_wisata/gen/assets.gen.dart';
-import 'package:tiket_wisata/constants/colors.dart';
+import 'package:tiket_wisata/semua_inputan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tiket_wisata/pages/ticket_page.dart';
 import '../widgets/nav_item.dart';
 import '../pages/order_page.dart';
 
@@ -93,7 +93,7 @@ class _MainPageState extends State<MainPage> {
       case 0:
         return const OrderPage();
       case 1:
-        return _buildTicketPage();
+        return const TicketPage();
       case 2:
         return _buildHistoryPage();
       case 3:
@@ -103,15 +103,7 @@ class _MainPageState extends State<MainPage> {
     }
   }
 
-  // Ticket page widget
-  Widget _buildTicketPage() {
-    return const Center(
-      child: Text(
-        'Ini halaman Ticket',
-        style: TextStyle(fontSize: 24),
-      ),
-    );
-  }
+
 
   // History page widget
   Widget _buildHistoryPage() {
