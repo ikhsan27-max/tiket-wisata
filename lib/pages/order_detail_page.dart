@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart'; // Add this import
-import '../gen/assets.gen.dart';
+
+import 'package:tiket_wisata/semua_inputan.dart';
+import '../customtext/custom_button.dart';
 import '../dialogs/payment_qris_dialog.dart';
 import '../dialogs/payment_tunai_dialog.dart';
 import '../models/product_models.dart';
-import '../constants/colors.dart';
-import '../extensions/ext.dart';
-import '../extensions/build_context_ext.dart';
+import '../widgets/order_detail_card.dart';
+import '../widgets/payment_method_button.dart';
 
 class OrderDetailPage extends StatelessWidget {
   final List<Product> products;
@@ -23,54 +23,16 @@ class OrderDetailPage extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Assets.images.back.image(),
-              // If SVG has issues, you can try using a regular icon as fallback
-              // or use Icon(Icons.arrow_back) as fallback
-            
           ),
         ),
       ),
       body: ListView.separated(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         itemCount: products.length,
-        separatorBuilder: (context, index) => const SizedBox(height: 20.0),
-        itemBuilder: (context, index) {
-          final product = products[index];
-          // Simple card instead of OrderDetailCard
-          return Card(
-            elevation: 3,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    product.productName,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('${product.type} - ${product.price.currencyFormatRp}'),
-                      Text('Qty: ${product.quantity}'),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Total: ${(product.price * product.quantity).currencyFormatRp}',
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
+        separatorBuilder: (context, index) => const SpaceHeight(20.0),
+        itemBuilder: (context, index) => OrderDetailCard(
+          item: products[index],
+        ),
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -81,29 +43,26 @@ class OrderDetailPage extends StatelessWidget {
               builder: (context, setState) => Row(
                 children: [
                   Expanded(
-                    child: _buildSimplePaymentButton(
-                      context: context,
-                      iconPath: 'assets/icons/payment/qris.svg',
+                    child: PaymentMethodButton(
+                      iconPath: Assets.icons.payment.qris,
                       label: 'QRIS',
                       isActive: paymentButtonIndex == 0,
                       onPressed: () => setState(() => paymentButtonIndex = 0),
                     ),
                   ),
-                  const SizedBox(width: 20.0),
+                  const SpaceWidth(20.0),
                   Expanded(
-                    child: _buildSimplePaymentButton(
-                      context: context,
-                      iconPath: 'assets/icons/payment/tunai.svg',
+                    child: PaymentMethodButton(
+                      iconPath: Assets.icons.payment.tunai,
                       label: 'Tunai',
                       isActive: paymentButtonIndex == 1,
                       onPressed: () => setState(() => paymentButtonIndex = 1),
                     ),
                   ),
-                  const SizedBox(width: 20.0),
+                  const SpaceWidth(20.0),
                   Expanded(
-                    child: _buildSimplePaymentButton(
-                      context: context,
-                      iconPath: 'assets/icons/payment/transfer.svg',
+                    child: PaymentMethodButton(
+                      iconPath: Assets.icons.payment.transfer,
                       label: 'Transfer',
                       isActive: paymentButtonIndex == 2,
                       onPressed: () => setState(() => paymentButtonIndex = 2),
@@ -112,7 +71,7 @@ class OrderDetailPage extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 24.0),
+            const SpaceHeight(24.0),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               decoration: BoxDecoration(
@@ -136,7 +95,7 @@ class OrderDetailPage extends StatelessWidget {
                       children: [
                         const Text('Order Summary'),
                         Text(
-                          _calculateTotalPrice().currencyFormatRp,
+                          140000.currencyFormatRp,
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16.0,
@@ -147,7 +106,7 @@ class OrderDetailPage extends StatelessWidget {
                   ),
                   Expanded(
                     flex: 1,
-                    child: ElevatedButton(
+                    child: Button.filled(
                       onPressed: () {
                         if (paymentButtonIndex == 0) {
                           showDialog(
@@ -157,22 +116,13 @@ class OrderDetailPage extends StatelessWidget {
                         } else if (paymentButtonIndex == 1) {
                           showDialog(
                             context: context,
-                            builder: (context) => PaymentTunaiDialog(
-                              totalPrice: _calculateTotalPrice().toInt(),
+                            builder: (context) => const PaymentTunaiDialog(
+                              totalPrice: 140000,
                             ),
                           );
                         }
                       },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                      child: const Text(
-                        'Process',
-                        style: TextStyle(color: Colors.white),
-                      ),
+                      label: 'Process',
                     ),
                   ),
                 ],
@@ -182,58 +132,5 @@ class OrderDetailPage extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  // Modified method to use SVG for payment buttons
-  Widget _buildSimplePaymentButton({
-    required BuildContext context,
-    required String iconPath,
-    required String label,
-    required bool isActive,
-    required VoidCallback onPressed,
-  }) {
-    return InkWell(
-      onTap: onPressed,
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12.0),
-        decoration: BoxDecoration(
-          color: isActive ? AppColors.primaryColor.withOpacity(0.1) : Colors.transparent,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(
-            color: isActive ? AppColors.primaryColor : Colors.grey,
-          ),
-        ),
-        child: Column(
-          children: [
-            SvgPicture.asset(
-              iconPath,
-              width: 24,
-              height: 24,
-              colorFilter: ColorFilter.mode(
-                isActive ? AppColors.primaryColor : Colors.grey,
-                BlendMode.srcIn,
-              ),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              label,
-              style: TextStyle(
-                color: isActive ? AppColors.primaryColor : Colors.grey,
-                fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  // Helper method to calculate total price
-  double _calculateTotalPrice() {
-    double total = 0;
-    for (var product in products) {
-      total += product.price * product.quantity;
-    }
-    return total;
   }
 }
